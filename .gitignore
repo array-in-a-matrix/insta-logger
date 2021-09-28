@@ -130,3 +130,5 @@ dmypy.json
 
 # login credentials
 login.json
+# logged messages 
+messages.txt
