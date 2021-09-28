@@ -45,6 +45,11 @@ else:
 while True:
     last_message =  str(browser.find_element_by_xpath("/html/body/div[1]/section/div/div[2]/div/div/div[2]/div[2]/div/div[1]/div/div/div[last()]/div[2]/div").text)
     # get last message from site
+    try:
+        l_message_author = str(browser.find_element_by_xpath("/html/body/div[1]/section/div/div[2]/div/div/div[2]/div[2]/div/div[1]/div/div/div[last()]/div[1]/div/a").get_attribute("href"))[26:-1]
+    except NoSuchElementException as exception:
+        l_message_author = username
+
     last_line = ''
     with open('messages.txt', "r") as f:
         for line in f:
@@ -53,19 +58,12 @@ while True:
         print(last_line)
         f.close()
         #get last entry from log file
-
     if last_message == last_line:
         pass
     else:
         with open('messages.txt', "a+") as f:
-            f.writelines('\n')
+            f.writelines('\n' + l_message_author + ':\n')
             f.writelines(last_message)
         f.close()
         # if last dm is already logged, do nothing, else log it
-
-#* try:    
-#*     message = browser.find_element_by_xpath(xpath_here).text
-#*     print(message)
-#* except NoSuchElementException as exception:
-#*     print("no message to display")
-#*? error handling if a specifc element does not exist, might need this later
+#? probably better to log to a json file
