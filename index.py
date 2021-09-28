@@ -49,7 +49,7 @@ while True:
         l_message_author = str(browser.find_element_by_xpath("/html/body/div[1]/section/div/div[2]/div/div/div[2]/div[2]/div/div[1]/div/div/div[last()]/div[1]/div/a").get_attribute("href"))[26:-1]
     except NoSuchElementException as exception:
         l_message_author = username
-
+    # get last message's author if not found its probably you who sent it
     last_line = ''
     with open('messages.txt', "r") as f:
         for line in f:
@@ -66,4 +66,4 @@ while True:
             f.writelines(last_message)
         f.close()
         # if last dm is already logged, do nothing, else log it
-#? probably better to log to a json file
+#? probably better to log to a json file or a db
