@@ -15,9 +15,9 @@ private  = json_object['private']
 # get account credentials from json file
 # are we loging a private chat or a group chat?
 
-if private == "Yes":
+if private == "Yes" or str.lower(private) == "true":
     private = True
-elif private == "No":
+elif private == "No" or str.lower(private) == "false":
     private = False
     
 browser = webdriver.Firefox()
